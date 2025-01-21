@@ -118,8 +118,6 @@ void APlayer_Base::Tick(float DeltaTime)
 	LockOnTarget();
 
 	SmoothCameraCollision();
-
-	PlayerTransparent();
 }
 
 void APlayer_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -286,11 +284,6 @@ void APlayer_Base::LockOnTarget()
 			CameraBoom->TargetArmLength = ArmLength;
 		}
 	}
-}
-
-void APlayer_Base::PlayerTransparent()
-{
-
 }
 
 void APlayer_Base::OnLockOnCollisionBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

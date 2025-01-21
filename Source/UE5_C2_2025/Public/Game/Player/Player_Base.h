@@ -79,8 +79,6 @@ protected:
 	void SmoothCameraCollision();
 	//ロックオン後のカメラやプレイヤーの処理
 	void LockOnTarget();
-	//プレイヤーの透過処理
-	void PlayerTransparent();
 
 protected:
 	//ロックオンのコリジョンに入ったときの処理
