@@ -16,6 +16,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetArrayLibrary.h"
 #include "Game/System/LockOnInterface.h"
+#include "Runtime/GameplayTags/Public/GameplayTags.h"
 
 #define DEFAULT_TARGET_ARM_LENGTH	800.f			//デフォルトのプレイヤーまでのカメラの距離
 #define MAX_TARGET_ARM_LENGTH		3000.f			//デフォルトのプレイヤーまでのカメラの距離
@@ -80,6 +81,9 @@ APlayer_Base::APlayer_Base()
 	LockOnCollision->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);									//コリジョンのオブジェクトタイプをLockOnにする
 	LockOnCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);									//コリジョンに対する反応をすべてIgnoreにする
 	LockOnCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);		//コリジョンに対する反応をPawnだけOverlapにする
+
+	// AbilitySystemコンポーネントを作成する
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 
 	//AActorの初期化
 	LockOnTargetActor = nullptr;
@@ -316,6 +320,24 @@ void APlayer_Base::OnLockOnCollisionBeginOverlap(UPrimitiveComponent* Overlapped
 void APlayer_Base::OnLockOnCollisionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
+}
+
+void APlayer_Base::AddAbility(TSubclassOf<class UGameplayAbility> Ability, int32 AbilityLevel)
+{
+	if (AbilitySystemComponent && Ability)
+	{
+		AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability.GetDefaultObject(), AbilityLevel, -1));
+	}
+}
+
+bool APlayer_Base::ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation)
+{
+	if (AbilitySystemComponent) 
+	{
+		return AbilitySystemComponent->TryActivateAbilitiesByTag(AbilityTags, bAllowRemoteActivation);
+	}
+
+	return false;
 }
 
 AActor* APlayer_Base::GetArraySortingFirstElement(TArray<AActor*> Array)

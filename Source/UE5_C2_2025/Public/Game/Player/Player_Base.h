@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemInterface.h"
 #include "Player_Base.generated.h"
 
 //継承してブループリントで使うためのクラス
@@ -39,6 +41,10 @@ protected:
 	//ロックオンのボックスコンポーネント
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Character, meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent* LockOnCollision;
+
+	// AbilitySystemコンポーネント
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, meta = (AllowPrivateAccess = "true"))
+	class UAbilitySystemComponent* AbilitySystemComponent;
 
 protected:
 	//ロックオンの候補
@@ -87,6 +93,14 @@ protected:
 	//ロックオンのコリジョンから出たときの処理
 	UFUNCTION()
 	void OnLockOnCollisionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	// Abilityの登録
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Target"))
+	void AddAbility(TSubclassOf<class UGameplayAbility> Ability, int32 AbilityLevel);
+
+	// Abilityの発動
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Target"))
+	bool ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation);
 
 protected:
 	//ソートされた配列の最初の要素を取得
