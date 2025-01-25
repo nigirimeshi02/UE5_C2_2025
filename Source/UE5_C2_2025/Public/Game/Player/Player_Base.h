@@ -7,11 +7,12 @@
 #include "InputActionValue.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemInterface.h"
+#include "PlayerAttributeSet.h"
 #include "Player_Base.generated.h"
 
 //継承してブループリントで使うためのクラス
 UCLASS()
-class UE5_C2_2025_API APlayer_Base : public ACharacter
+class UE5_C2_2025_API APlayer_Base : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -45,6 +46,10 @@ protected:
 	// AbilitySystemコンポーネント
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, meta = (AllowPrivateAccess = "true"))
 	class UAbilitySystemComponent* AbilitySystemComponent;
+
+	// プレイヤー用AttributeSet
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPlayerAttributeSet* PlayerAttributeSet;
 
 protected:
 	//ロックオンの候補
@@ -105,5 +110,11 @@ protected:
 protected:
 	//ソートされた配列の最初の要素を取得
 	AActor* GetArraySortingFirstElement(TArray<AActor*> Array);
+
+	// AbilitySystemコンポーネントの取得
+	UAbilitySystemComponent* GetAbilitySystemComponent() const 
+	{
+		return AbilitySystemComponent;
+	};
 
 };

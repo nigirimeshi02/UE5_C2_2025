@@ -82,8 +82,11 @@ APlayer_Base::APlayer_Base()
 	LockOnCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);									//コリジョンに対する反応をすべてIgnoreにする
 	LockOnCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);		//コリジョンに対する反応をPawnだけOverlapにする
 
-	// AbilitySystemコンポーネントを作成する
+	// AbilitySystemコンポーネントを追加する
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+
+	// プレイヤー用AttributeSetを追加
+	PlayerAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(TEXT("AttributeSet"));
 
 	//AActorの初期化
 	LockOnTargetActor = nullptr;
