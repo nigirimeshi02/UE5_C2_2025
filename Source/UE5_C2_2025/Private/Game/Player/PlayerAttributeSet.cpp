@@ -4,7 +4,14 @@
 #include "Game/Player/PlayerAttributeSet.h"
 
 UPlayerAttributeSet::UPlayerAttributeSet() :
-	Stamina(0.f)
+	Health(300.f),
+	MaxHealth(300.f),
+	Stamina(0.f),
+	MaxStamina(0.f),
+	AttackPower(128.f),
+	DefensePower(88.f),
+	CriticalRate(54.f),
+	CriticalDamage(150.f)
 {
 
 }

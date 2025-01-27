@@ -27,9 +27,44 @@ public:
 	// コンストラクタ
 	UPlayerAttributeSet();
 
-	//スキルのクールタイム
+	//体力
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, Health)
+
+	//最大体力
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaxHealth)
+
+	//スタミナ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayAttributeData Stamina;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, Stamina)
+
+	//最大スタミナ
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData MaxStamina;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaxStamina)
+
+	//攻撃力
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData AttackPower;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, AttackPower)
+
+	//防御力
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData DefensePower;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, DefensePower)
 	
+	//クリティカル率
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData CriticalRate;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CriticalRate)
+
+	//クリティカルダメージ
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData CriticalDamage;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CriticalDamage)
+
 };

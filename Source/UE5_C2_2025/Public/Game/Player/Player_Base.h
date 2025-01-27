@@ -100,12 +100,44 @@ protected:
 	void OnLockOnCollisionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	// Abilityの登録
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Target"))
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
 	void AddAbility(TSubclassOf<class UGameplayAbility> Ability, int32 AbilityLevel);
 
-	// Abilityの発動
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Target"))
+	//Abilityの発動
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
 	bool ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation);
+
+	//体力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetHealth(float NewHealth);
+
+	//最大体力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetMaxHealth(float NewMaxHealth);
+
+	//スタミナを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetStamina(float NewStamina);
+
+	//最大スタミナを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetMaxStamina(float NewMaxStamina);
+
+	//攻撃力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetAttackPower(float NewAttackPower);
+
+	//防御力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetDefensePower(float NewDefensePower);
+
+	//クリティカル率を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetCriticalRate(float NewCriticalRate);
+
+	//クリティカルダメージを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetCriticalDamage(float NewCriticalDamage);
 
 protected:
 	//ソートされた配列の最初の要素を取得

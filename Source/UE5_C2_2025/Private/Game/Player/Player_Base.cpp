@@ -233,7 +233,7 @@ void APlayer_Base::LockOnTarget()
 		FRotator InterpActorRotarion = UKismetMathLibrary::RInterpTo(this->GetActorRotation(), FindActorRotation, GetWorld()->GetDeltaSeconds(), 10.f);
 
 		//アクターを回転させる
-		SetActorRotation(FRotator(this->GetActorRotation().Pitch, InterpActorRotarion.Yaw, this->GetActorRotation().Roll));
+		//SetActorRotation(FRotator(this->GetActorRotation().Pitch, InterpActorRotarion.Yaw, this->GetActorRotation().Roll));
 
 		//コントローラーが有効なら
 		if (Controller)
@@ -304,7 +304,7 @@ void APlayer_Base::OnLockOnCollisionBeginOverlap(UPrimitiveComponent* Overlapped
 		if (LockOnCandidates.IsValidIndex(0))
 		{
 			//プレイヤーの向きを固定する
-			GetCharacterMovement()->bOrientRotationToMovement = false;
+			//GetCharacterMovement()->bOrientRotationToMovement = false;
 			//強制的にカメラの長さをもとに戻す
 			CameraBoom->TargetArmLength = DEFAULT_TARGET_ARM_LENGTH;
 			//ロックオンする
@@ -341,6 +341,46 @@ bool APlayer_Base::ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, 
 	}
 
 	return false;
+}
+
+void APlayer_Base::SetHealth(float NewHealth)
+{
+	PlayerAttributeSet->Health = NewHealth;
+}
+
+void APlayer_Base::SetMaxHealth(float NewMaxHealth)
+{
+	PlayerAttributeSet->MaxHealth = NewMaxHealth;
+}
+
+void APlayer_Base::SetStamina(float NewStamina)
+{
+	PlayerAttributeSet->Stamina = NewStamina;
+}
+
+void APlayer_Base::SetMaxStamina(float NewMaxStamina)
+{
+	PlayerAttributeSet->MaxStamina = NewMaxStamina;
+}
+
+void APlayer_Base::SetAttackPower(float NewAttackPower)
+{
+	PlayerAttributeSet->AttackPower = NewAttackPower;
+}
+
+void APlayer_Base::SetDefensePower(float NewDefensePower)
+{
+	PlayerAttributeSet->DefensePower = NewDefensePower;
+}
+
+void APlayer_Base::SetCriticalRate(float NewCriticalRate)
+{
+	PlayerAttributeSet->CriticalRate = NewCriticalRate;
+}
+
+void APlayer_Base::SetCriticalDamage(float NewCriticalDamage)
+{
+	PlayerAttributeSet->CriticalDamage = NewCriticalDamage;
 }
 
 AActor* APlayer_Base::GetArraySortingFirstElement(TArray<AActor*> Array)
