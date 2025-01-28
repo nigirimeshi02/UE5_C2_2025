@@ -16,6 +16,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetArrayLibrary.h"
 #include "Game/System/LockOnInterface.h"
+#include "Runtime/GameplayTags/Public/GameplayTags.h"
 
 #define DEFAULT_TARGET_ARM_LENGTH	800.f			//デフォルトのプレイヤーまでのカメラの距離
 #define MAX_TARGET_ARM_LENGTH		3000.f			//デフォルトのプレイヤーまでのカメラの距離
@@ -80,6 +81,12 @@ APlayer_Base::APlayer_Base()
 	LockOnCollision->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);									//コリジョンのオブジェクトタイプをLockOnにする
 	LockOnCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);									//コリジョンに対する反応をすべてIgnoreにする
 	LockOnCollision->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);		//コリジョンに対する反応をPawnだけOverlapにする
+
+	// AbilitySystemコンポーネントを追加する
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+
+	// プレイヤー用AttributeSetを追加
+	PlayerAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(TEXT("AttributeSet"));
 
 	//AActorの初期化
 	LockOnTargetActor = nullptr;
@@ -226,7 +233,7 @@ void APlayer_Base::LockOnTarget()
 		FRotator InterpActorRotarion = UKismetMathLibrary::RInterpTo(this->GetActorRotation(), FindActorRotation, GetWorld()->GetDeltaSeconds(), 10.f);
 
 		//アクターを回転させる
-		SetActorRotation(FRotator(this->GetActorRotation().Pitch, InterpActorRotarion.Yaw, this->GetActorRotation().Roll));
+		//SetActorRotation(FRotator(this->GetActorRotation().Pitch, InterpActorRotarion.Yaw, this->GetActorRotation().Roll));
 
 		//コントローラーが有効なら
 		if (Controller)
@@ -297,7 +304,7 @@ void APlayer_Base::OnLockOnCollisionBeginOverlap(UPrimitiveComponent* Overlapped
 		if (LockOnCandidates.IsValidIndex(0))
 		{
 			//プレイヤーの向きを固定する
-			GetCharacterMovement()->bOrientRotationToMovement = false;
+			//GetCharacterMovement()->bOrientRotationToMovement = false;
 			//強制的にカメラの長さをもとに戻す
 			CameraBoom->TargetArmLength = DEFAULT_TARGET_ARM_LENGTH;
 			//ロックオンする
@@ -316,6 +323,64 @@ void APlayer_Base::OnLockOnCollisionBeginOverlap(UPrimitiveComponent* Overlapped
 void APlayer_Base::OnLockOnCollisionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
+}
+
+void APlayer_Base::AddAbility(TSubclassOf<class UGameplayAbility> Ability, int32 AbilityLevel)
+{
+	if (AbilitySystemComponent && Ability)
+	{
+		AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability.GetDefaultObject(), AbilityLevel, -1));
+	}
+}
+
+bool APlayer_Base::ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation)
+{
+	if (AbilitySystemComponent) 
+	{
+		return AbilitySystemComponent->TryActivateAbilitiesByTag(AbilityTags, bAllowRemoteActivation);
+	}
+
+	return false;
+}
+
+void APlayer_Base::SetHealth(float NewHealth)
+{
+	PlayerAttributeSet->Health = NewHealth;
+}
+
+void APlayer_Base::SetMaxHealth(float NewMaxHealth)
+{
+	PlayerAttributeSet->MaxHealth = NewMaxHealth;
+}
+
+void APlayer_Base::SetStamina(float NewStamina)
+{
+	PlayerAttributeSet->Stamina = NewStamina;
+}
+
+void APlayer_Base::SetMaxStamina(float NewMaxStamina)
+{
+	PlayerAttributeSet->MaxStamina = NewMaxStamina;
+}
+
+void APlayer_Base::SetAttackPower(float NewAttackPower)
+{
+	PlayerAttributeSet->AttackPower = NewAttackPower;
+}
+
+void APlayer_Base::SetDefensePower(float NewDefensePower)
+{
+	PlayerAttributeSet->DefensePower = NewDefensePower;
+}
+
+void APlayer_Base::SetCriticalRate(float NewCriticalRate)
+{
+	PlayerAttributeSet->CriticalRate = NewCriticalRate;
+}
+
+void APlayer_Base::SetCriticalDamage(float NewCriticalDamage)
+{
+	PlayerAttributeSet->CriticalDamage = NewCriticalDamage;
 }
 
 AActor* APlayer_Base::GetArraySortingFirstElement(TArray<AActor*> Array)

@@ -5,11 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemInterface.h"
+#include "PlayerAttributeSet.h"
 #include "Player_Base.generated.h"
 
 //継承してブループリントで使うためのクラス
 UCLASS()
-class UE5_C2_2025_API APlayer_Base : public ACharacter
+class UE5_C2_2025_API APlayer_Base : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -39,6 +42,14 @@ protected:
 	//ロックオンのボックスコンポーネント
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Character, meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent* LockOnCollision;
+
+	// AbilitySystemコンポーネント
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Abilities, meta = (AllowPrivateAccess = "true"))
+	class UAbilitySystemComponent* AbilitySystemComponent;
+
+	// プレイヤー用AttributeSet
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPlayerAttributeSet* PlayerAttributeSet;
 
 protected:
 	//ロックオンの候補
@@ -88,8 +99,54 @@ protected:
 	UFUNCTION()
 	void OnLockOnCollisionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	// Abilityの登録
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
+	void AddAbility(TSubclassOf<class UGameplayAbility> Ability, int32 AbilityLevel);
+
+	//Abilityの発動
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
+	bool ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation);
+
+	//体力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetHealth(float NewHealth);
+
+	//最大体力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetMaxHealth(float NewMaxHealth);
+
+	//スタミナを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetStamina(float NewStamina);
+
+	//最大スタミナを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetMaxStamina(float NewMaxStamina);
+
+	//攻撃力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetAttackPower(float NewAttackPower);
+
+	//防御力を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetDefensePower(float NewDefensePower);
+
+	//クリティカル率を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetCriticalRate(float NewCriticalRate);
+
+	//クリティカルダメージを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetCriticalDamage(float NewCriticalDamage);
+
 protected:
 	//ソートされた配列の最初の要素を取得
 	AActor* GetArraySortingFirstElement(TArray<AActor*> Array);
+
+	// AbilitySystemコンポーネントの取得
+	UAbilitySystemComponent* GetAbilitySystemComponent() const 
+	{
+		return AbilitySystemComponent;
+	};
 
 };
