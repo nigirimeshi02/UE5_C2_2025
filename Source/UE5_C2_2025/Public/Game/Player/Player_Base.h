@@ -107,6 +107,10 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
 	bool ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, bool bAllowRemoteActivation);
 
+	//Effectの登録
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
+	void AddEffect(TSubclassOf<class UGameplayEffect> Effect, int32 EffectLevel);
+
 	//体力を設定
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
 	void SetHealth(float NewHealth);

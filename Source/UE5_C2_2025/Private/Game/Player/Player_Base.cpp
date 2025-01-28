@@ -343,6 +343,21 @@ bool APlayer_Base::ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, 
 	return false;
 }
 
+void APlayer_Base::AddEffect(TSubclassOf<class UGameplayEffect> Effect, int32 EffectLevel)
+{
+	if (AbilitySystemComponent && Effect)
+	{
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		EffectContext.AddSourceObject(this);
+
+		FGameplayEffectSpecHandle NewHandle = AbilitySystemComponent->MakeOutgoingSpec(Effect, EffectLevel, EffectContext);
+		if (NewHandle.IsValid())
+		{
+			AbilitySystemComponent->ApplyGameplayEffectSpecToTarget(*NewHandle.Data.Get(), AbilitySystemComponent);
+		}
+	}
+}
+
 void APlayer_Base::SetHealth(float NewHealth)
 {
 	PlayerAttributeSet->Health = NewHealth;

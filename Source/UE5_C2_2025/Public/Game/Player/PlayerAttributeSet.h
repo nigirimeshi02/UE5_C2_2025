@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "GameplayEffect.h"
+#include "GameplayEffectExtension.h"
 #include "PlayerAttributeSet.generated.h"
 
 //アクセサ(Setter、Getter)を生成するためのマクロ
@@ -26,6 +28,9 @@ public:
 
 	// コンストラクタ
 	UPlayerAttributeSet();
+
+	// GameplayEffect動作後の処理
+	void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)override;
 
 	//体力
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

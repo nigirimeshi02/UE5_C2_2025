@@ -6,12 +6,23 @@
 UPlayerAttributeSet::UPlayerAttributeSet() :
 	Health(300.f),
 	MaxHealth(300.f),
-	Stamina(0.f),
-	MaxStamina(0.f),
+	Stamina(100.f),
+	MaxStamina(100.f),
 	AttackPower(128.f),
 	DefensePower(88.f),
-	CriticalRate(54.f),
+	CriticalRate(36.f),
 	CriticalDamage(150.f)
 {
 
+}
+
+void UPlayerAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	// スタミナ値の更新が走った場合はスタミナ値をMaxとMinの間に収まるようにする
+	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
+	{
+		SetStamina(FMath::Clamp(GetStamina(), 0.f, 100.f));
+	}
 }
