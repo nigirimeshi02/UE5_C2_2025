@@ -52,17 +52,20 @@ protected:
 	UPlayerAttributeSet* PlayerAttributeSet;
 
 protected:
+	//ロックオンの対象
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = LockOn, meta = (AllowPrivateAccess = "true"))
+	class AActor* LockOnTargetActor;
+
+	//ロックオンのフラグ
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = LockOn, meta = (AllowPrivateAccess = "true"))
+	bool LockOnFlg;
+
+protected:
 	//ロックオンの候補
 	TArray<class AActor*> LockOnCandidates;
 
-	//ロックオンの対象
-	class AActor* LockOnTargetActor;
-
 	//カメラの衝突の絶対座標
 	FVector CameraImpactPoint;
-
-	//ロックオンのフラグ
-	bool LockOnFlg;
 
 public:
 	//コンストラクタ
