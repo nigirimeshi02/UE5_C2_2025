@@ -130,6 +130,14 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
 	void SetMaxStamina(float NewMaxStamina);
 
+	//エネルギーを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetEnergy(float NewEnergy);
+
+	//最大エネルギーを設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetMaxEnergy(float NewMaxEnergy);
+
 	//攻撃力を設定
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
 	void SetAttackPower(float NewAttackPower);
@@ -145,6 +153,10 @@ protected:
 	//クリティカルダメージを設定
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
 	void SetCriticalDamage(float NewCriticalDamage);
+
+	//攻撃速度を設定
+	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
+	void SetAttackSpeed(float NewAttackSpeed);
 
 protected:
 	//ソートされた配列の最初の要素を取得
