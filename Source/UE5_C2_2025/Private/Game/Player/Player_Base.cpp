@@ -19,7 +19,7 @@
 #include "Runtime/GameplayTags/Public/GameplayTags.h"
 
 #define DEFAULT_TARGET_ARM_LENGTH	800.f			//デフォルトのプレイヤーまでのカメラの距離
-#define MAX_TARGET_ARM_LENGTH		3000.f			//デフォルトのプレイヤーまでのカメラの距離
+#define MAX_TARGET_ARM_LENGTH		1500.f			//デフォルトのプレイヤーまでのカメラの距離
 
 APlayer_Base::APlayer_Base()
 {
@@ -88,14 +88,15 @@ APlayer_Base::APlayer_Base()
 	// プレイヤー用AttributeSetを追加
 	PlayerAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(TEXT("AttributeSet"));
 
-	//AActorの初期化
+	//ロックオンの対象の初期化
 	LockOnTargetActor = nullptr;
+
+	//ロックオンのフラグの初期化
+	LockOnFlg = false;
 
 	//FVectorの初期化
 	CameraImpactPoint = FVector(0.f);
 
-	//boolの初期化
-	LockOnFlg = false;
 }
 
 void APlayer_Base::BeginPlay()
@@ -171,7 +172,7 @@ void APlayer_Base::Look(const FInputActionValue& Value)
 	//入力をVector2Dで受け取る
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
 
-	if (Controller != nullptr)
+	if (Controller != nullptr && !LockOnFlg)
 	{
 		//ヨーとピッチの入力を加える
 		AddControllerYawInput(LookAxisVector.X);
