@@ -52,6 +52,16 @@ public:
 	FGameplayAttributeData MaxStamina;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaxStamina)
 
+	//エネルギー
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData Energy;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, Energy)
+
+	//最大エネルギー
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData MaxEnergy;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaxEnergy)
+
 	//攻撃力
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayAttributeData AttackPower;
@@ -71,5 +81,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayAttributeData CriticalDamage;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CriticalDamage)
+
+	//攻撃速度
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData AttackSpeed;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, AttackSpeed)
 
 };

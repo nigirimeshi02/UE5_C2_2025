@@ -8,10 +8,13 @@ UPlayerAttributeSet::UPlayerAttributeSet() :
 	MaxHealth(300.f),
 	Stamina(100.f),
 	MaxStamina(100.f),
+	Energy(0.f),
+	MaxEnergy(100.f),
 	AttackPower(128.f),
 	DefensePower(88.f),
 	CriticalRate(36.f),
-	CriticalDamage(150.f)
+	CriticalDamage(150.f),
+	AttackSpeed(1.2f)
 {
 
 }

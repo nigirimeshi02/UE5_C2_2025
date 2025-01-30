@@ -379,6 +379,16 @@ void APlayer_Base::SetMaxStamina(float NewMaxStamina)
 	PlayerAttributeSet->MaxStamina = NewMaxStamina;
 }
 
+void APlayer_Base::SetEnergy(float NewEnergy)
+{
+	PlayerAttributeSet->Energy = NewEnergy;
+}
+
+void APlayer_Base::SetMaxEnergy(float NewMaxEnergy)
+{
+	PlayerAttributeSet->MaxEnergy = NewMaxEnergy;
+}
+
 void APlayer_Base::SetAttackPower(float NewAttackPower)
 {
 	PlayerAttributeSet->AttackPower = NewAttackPower;
@@ -397,6 +407,11 @@ void APlayer_Base::SetCriticalRate(float NewCriticalRate)
 void APlayer_Base::SetCriticalDamage(float NewCriticalDamage)
 {
 	PlayerAttributeSet->CriticalDamage = NewCriticalDamage;
+}
+
+void APlayer_Base::SetAttackSpeed(float NewAttackSpeed)
+{
+	PlayerAttributeSet->AttackSpeed = NewAttackSpeed;
 }
 
 AActor* APlayer_Base::GetArraySortingFirstElement(TArray<AActor*> Array)
