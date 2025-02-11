@@ -114,50 +114,6 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "Ability"))
 	void AddEffect(TSubclassOf<class UGameplayEffect> Effect, int32 EffectLevel);
 
-	//体力を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetHealth(float NewHealth);
-
-	//最大体力を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetMaxHealth(float NewMaxHealth);
-
-	//スタミナを設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetStamina(float NewStamina);
-
-	//最大スタミナを設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetMaxStamina(float NewMaxStamina);
-
-	//エネルギーを設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetEnergy(float NewEnergy);
-
-	//最大エネルギーを設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetMaxEnergy(float NewMaxEnergy);
-
-	//攻撃力を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetAttackPower(float NewAttackPower);
-
-	//防御力を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetDefensePower(float NewDefensePower);
-
-	//クリティカル率を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetCriticalRate(float NewCriticalRate);
-
-	//クリティカルダメージを設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetCriticalDamage(float NewCriticalDamage);
-
-	//攻撃速度を設定
-	UFUNCTION(BlueprintCallable, meta = (DefaultToSelf = "AttributeSet"))
-	void SetAttackSpeed(float NewAttackSpeed);
-
 protected:
 	//ソートされた配列の最初の要素を取得
 	AActor* GetArraySortingFirstElement(TArray<AActor*> Array);

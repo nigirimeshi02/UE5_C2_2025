@@ -340,7 +340,7 @@ bool APlayer_Base::ActivateAbilitiesWithTags(FGameplayTagContainer AbilityTags, 
 	{
 		return AbilitySystemComponent->TryActivateAbilitiesByTag(AbilityTags, bAllowRemoteActivation);
 	}
-
+	
 	return false;
 }
 
@@ -357,61 +357,6 @@ void APlayer_Base::AddEffect(TSubclassOf<class UGameplayEffect> Effect, int32 Ef
 			AbilitySystemComponent->ApplyGameplayEffectSpecToTarget(*NewHandle.Data.Get(), AbilitySystemComponent);
 		}
 	}
-}
-
-void APlayer_Base::SetHealth(float NewHealth)
-{
-	PlayerAttributeSet->Health = NewHealth;
-}
-
-void APlayer_Base::SetMaxHealth(float NewMaxHealth)
-{
-	PlayerAttributeSet->MaxHealth = NewMaxHealth;
-}
-
-void APlayer_Base::SetStamina(float NewStamina)
-{
-	PlayerAttributeSet->Stamina = NewStamina;
-}
-
-void APlayer_Base::SetMaxStamina(float NewMaxStamina)
-{
-	PlayerAttributeSet->MaxStamina = NewMaxStamina;
-}
-
-void APlayer_Base::SetEnergy(float NewEnergy)
-{
-	PlayerAttributeSet->Energy = NewEnergy;
-}
-
-void APlayer_Base::SetMaxEnergy(float NewMaxEnergy)
-{
-	PlayerAttributeSet->MaxEnergy = NewMaxEnergy;
-}
-
-void APlayer_Base::SetAttackPower(float NewAttackPower)
-{
-	PlayerAttributeSet->AttackPower = NewAttackPower;
-}
-
-void APlayer_Base::SetDefensePower(float NewDefensePower)
-{
-	PlayerAttributeSet->DefensePower = NewDefensePower;
-}
-
-void APlayer_Base::SetCriticalRate(float NewCriticalRate)
-{
-	PlayerAttributeSet->CriticalRate = NewCriticalRate;
-}
-
-void APlayer_Base::SetCriticalDamage(float NewCriticalDamage)
-{
-	PlayerAttributeSet->CriticalDamage = NewCriticalDamage;
-}
-
-void APlayer_Base::SetAttackSpeed(float NewAttackSpeed)
-{
-	PlayerAttributeSet->AttackSpeed = NewAttackSpeed;
 }
 
 AActor* APlayer_Base::GetArraySortingFirstElement(TArray<AActor*> Array)
