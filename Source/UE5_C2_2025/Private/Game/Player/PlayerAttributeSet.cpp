@@ -15,7 +15,7 @@ UPlayerAttributeSet::UPlayerAttributeSet() :
 	CriticalRate(36.f),
 	CriticalDamage(150.f),
 	AttackSpeed(1.2f),
-	SkillCoolTime(10.0f),
+	SkillCoolTime(5.0f),
 	UltimateSkillCoolTime(30.0f)
 {
 
@@ -29,5 +29,21 @@ void UPlayerAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCall
 	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
 	{
 		SetStamina(FMath::Clamp(GetStamina(), 0.f, 100.f));
+	}
+
+	if (Data.EvaluatedData.Attribute == GetSkillCoolTimeAttribute())
+	{
+		if (GetSkillCoolTime() < 0)
+		{
+			SetSkillCoolTime(5.0f);
+		}
+	}
+
+	if (Data.EvaluatedData.Attribute == GetUltimateSkillCoolTimeAttribute())
+	{
+		if (GetUltimateSkillCoolTime() < 0)
+		{
+			SetUltimateSkillCoolTime(30.0f);
+		}
 	}
 }
