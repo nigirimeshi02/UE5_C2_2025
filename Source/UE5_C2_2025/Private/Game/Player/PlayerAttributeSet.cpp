@@ -14,7 +14,9 @@ UPlayerAttributeSet::UPlayerAttributeSet() :
 	DefensePower(88.f),
 	CriticalRate(36.f),
 	CriticalDamage(150.f),
-	AttackSpeed(1.2f)
+	AttackSpeed(1.2f),
+	SkillCoolTime(10.0f),
+	UltimateSkillCoolTime(30.0f)
 {
 
 }

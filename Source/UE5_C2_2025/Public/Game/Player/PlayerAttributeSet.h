@@ -87,4 +87,14 @@ public:
 	FGameplayAttributeData AttackSpeed;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, AttackSpeed)
 
+	//スキルクールタイム
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData SkillCoolTime;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, SkillCoolTime)
+
+	//必殺技クールタイム
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FGameplayAttributeData UltimateSkillCoolTime;
+	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, UltimateSkillCoolTime)
+
 };
