@@ -242,7 +242,7 @@ void APlayer_Base::LockOnTarget()
 			//向きたい方向へのコントローラーの回転値の補間
 			FRotator InterpControlRotation = UKismetMathLibrary::RInterpTo(Controller->GetControlRotation(), FindActorRotation, GetWorld()->GetDeltaSeconds(), 3.f);
 			//微調整用
-			float Adjustment = 1.5f;
+			float Adjustment = 2.5f;
 			InterpControlRotation.Pitch -= Adjustment;
 			////ControllerのPitchの角度を制限する
 			double LimitPitchAngle = FMath::ClampAngle(InterpControlRotation.Pitch, -30.f, -5.f);
